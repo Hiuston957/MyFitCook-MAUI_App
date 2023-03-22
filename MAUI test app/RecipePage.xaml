@@ -3,16 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_test_app.RecipePage">
 
-    
-    
+
+
     <ScrollView>
         <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+            Spacing="20"
+            Padding="300,0"
+            VerticalOptions="Center"
+            
+            >
 
             <Image
-                Source="burger.png"
+                Source="cooking.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center" />
@@ -21,23 +23,53 @@
                 x:Name="Title"
                 Text="Title"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
+                FontSize="70"
                 HorizontalOptions="Center" />
 
-            <ListView x:Name="ListOfIngredients" Background="blue" VerticalOptions="Center"  IsVisible="false" >
+            <ListView x:Name="ListOfIngredients"  VerticalOptions="Fill"  IsVisible="false" >
             </ListView>
 
-            <ListView x:Name="ListOfCusoomIngredients" Background="blue" VerticalOptions="Center"   >
+            <Label
+               
+                Text="Ingredients:"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="24"
+                Margin="0,0,0,10"
+               
+                 />
+
+            <ListView x:Name="ListOfCusoomIngredients"  HorizontalOptions="Fill" Margin="0"  >
             </ListView>
+
+            <Label
+               
+                Text="Instruction:"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="24"
+                Margin="0,10,0,10"
+                
+
+                
+                
+                
+                 />
+
 
             <Label
                 x:Name="Instruction"
                 Text="Instruction"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="15"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Fill" 
+                   
+                
+                
+          
+                
+                />
 
-            <Label x:Name="ListOfCopmpsition" Background="blue" VerticalOptions="Center"  >
+            <Label x:Name="ListOfCopmpsition"  FontSize="15"  HorizontalOptions="Center" Margin="0,10,0,0" >
+
             </Label>
 
         </VerticalStackLayout>
