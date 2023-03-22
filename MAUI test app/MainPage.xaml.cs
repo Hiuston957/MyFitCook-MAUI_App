@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Controls.Xaml;
+﻿
+using Microsoft.Maui.Controls.Xaml;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 namespace MAUI_test_app;
 
@@ -8,12 +10,17 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
+        Chats = GetChats();
+        BindingContext = this;
     }
 
     private void SgowAvableRecipes(object sender, EventArgs e)
     {
 
-        FoundListLabel.IsVisible = true;
+        
+
+       // FoundListLabel.IsVisible = true;
 
         var FindForName = RecipeName.Text;
 
@@ -24,13 +31,25 @@ public partial class MainPage : ContentPage
 
         string quest = $"select ID_Recipe,Name from Recipes where Name LIKE '%{FindForName}%'";
 
+
+        if (FindForName == null) 
+        {
+            quest = $"SELECT NULL WHERE 1 = 0";
+        }
+
+
+
         SqlCommand cmd = new SqlCommand(quest, con);
 
         SqlDataReader reader = cmd.ExecuteReader();
 
         List<string> list = new List<string>();
 
-        int i = 0;
+        // int i = 0;
+
+        Chats.Clear();
+
+
         while (reader.Read())
         {
 
@@ -41,16 +60,20 @@ public partial class MainPage : ContentPage
 
             string tmp = $"{Id}. {Name}";
 
-            list.Add(tmp);
+            //list.Add(tmp);
 
+            FastList newMessage = new FastList(tmp);
+            Chats.Add(newMessage);
         }
 
         con.Close();
 
-        ListOfRecipes.ItemsSource = list;
+        //ListOfRecipes.ItemsSource = list;
 
     }
 
+
+    /*
     private async void Lux(object sender, EventArgs e)
     {
 
@@ -60,4 +83,43 @@ public partial class MainPage : ContentPage
         FoundListLabel.IsVisible = true;
 
     }
+    */
+
+
+   
+    private async void Lux2(object sender, EventArgs e)
+    {
+
+        await Shell.Current.GoToAsync("RecipePage");
+
+        string xd = (sender as Label)?.Text;
+
+        await DisplayAlert("Test Alert", xd, "OK");
+
+    }
+
+
+
+
+    //-------------------------------------------------------------------------------------
+    public ObservableCollection<FastList> Chats { get; set; }
+
+    private static ObservableCollection<FastList> GetChats() =>
+        new ObservableCollection<FastList>(
+            new List<FastList>
+            {
+
+            }
+        );
+
+
+    public record FastList(string Title)
+    {
+      
+    }
+
+
+
+
 }
+
