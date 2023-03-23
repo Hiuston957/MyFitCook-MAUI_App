@@ -7,7 +7,9 @@
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
-            VerticalOptions="Center">
+            VerticalOptions="Center"
+            MaximumWidthRequest="550"
+            >
 
             <Image
                 Source="burger.png"

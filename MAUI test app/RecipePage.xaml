@@ -7,17 +7,23 @@
 
     <ScrollView>
         <VerticalStackLayout
-            Spacing="20"
-            Padding="300,0"
+            Spacing="25"
+            Padding="30,0"
             VerticalOptions="Center"
-            
+            MaximumWidthRequest="550"
+               
             >
+            
+          
 
             <Image
                 Source="cooking.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" 
+
+                />
+            
 
             <Label
                 x:Name="Title"
@@ -26,7 +32,7 @@
                 FontSize="70"
                 HorizontalOptions="Center" />
 
-            <ListView x:Name="ListOfIngredients"  VerticalOptions="Fill"  IsVisible="false" >
+            <ListView x:Name="ListOfIngredients"  VerticalOptions="Fill"  IsVisible="false" Margin="100">
             </ListView>
 
             <Label
@@ -35,6 +41,7 @@
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="24"
                 Margin="0,0,0,10"
+                HorizontalOptions="Center"
                
                  />
 
@@ -47,7 +54,7 @@
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="24"
                 Margin="0,10,0,10"
-                
+                HorizontalOptions="Center"
 
                 
                 
@@ -60,8 +67,7 @@
                 Text="Instruction"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="15"
-                HorizontalOptions="Fill" 
-                   
+                HorizontalOptions="Center"
                 
                 
           
