@@ -26,9 +26,9 @@ namespace MAUI_test_app
 
         public Recipe(int id)
         {
-            
 
-            string loc = "Data Source=DESKTOP-LJ35QQ8;Initial Catalog=MyFitCook;Integrated Security=True";
+            string loc = Preferences.Default.Get("serverLoc", "Unknown");
+          
             SqlConnection con = new SqlConnection(loc);
             con.Open();
 
@@ -121,17 +121,22 @@ namespace MAUI_test_app
         */
 
 
-        public string Show_CustomComposition(double multiplier)
+        public string Show_CustomComposition(int UserKcal)
         {
+            double multipler = (double)UserKcal / (double)Composition[0];
+
             var tmplist = new List<string>();
            
             string tmp=
-                $"kcal: {Math.Round((double)Composition[0] * multiplier, 2)}, " +
-                $"Protein: {Math.Round((double)Composition[1] * multiplier, 2)}, " +
-                $"Carbs: {Math.Round((double)Composition[2] * multiplier, 2)}, " +
-                $"Fat: {Math.Round((double)Composition[3] * multiplier, 2)}";
+                $"kcal: {Math.Round((double)Composition[0] * multipler, 2)}, " +
+                $"Protein: {Math.Round((double)Composition[1] * multipler, 2)}, " +
+                $"Carbs: {Math.Round((double)Composition[2] * multipler, 2)}, " +
+                $"Fat: {Math.Round((double)Composition[3] * multipler, 2)}";
 
             return tmp;
+
+
+           
 
         }
 
@@ -164,9 +169,17 @@ namespace MAUI_test_app
 
 
 
-        public List<string> Show_CustomIngredients(double multiplier)
+        public List<string> Show_CustomIngredients(int UserKcal)
         {
-            
+
+            double multipler = (double)UserKcal / (double)Composition[0];
+
+
+
+
+
+
+
 
             var tmplist = new List<string>();
 
@@ -178,7 +191,7 @@ namespace MAUI_test_app
                 {
 
                     if (j==1)
-                        tmp += $"{Math.Round(     (double.Parse(Ingredients[i][j]) )*multiplier,2  )} ";
+                        tmp += $"{Math.Round(     (double.Parse(Ingredients[i][j]) )*multipler,2  )} ";
                     else
                         tmp += $"{Ingredients[i][j]} ";
                 }

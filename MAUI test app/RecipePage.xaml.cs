@@ -7,17 +7,18 @@ public partial class RecipePage : ContentPage
 	{
 		InitializeComponent();
 
-        int id = 1;
+        int id = Preferences.Default.Get("recId", -1);
+        int uKcal = Preferences.Default.Get("userKcal", -1);
+        //  Preferences.Default.Set("userId", 67);
         var Rec = new Recipe(id);
 
         Title.Text=Rec.Title;
         Instruction.Text = Rec.Description;
-        ListOfCusoomIngredients.ItemsSource = Rec.Show_CustomIngredients(5);
-        ListOfCopmpsition.Text = Rec.Show_CustomComposition(5);
+        ListOfCusoomIngredients.ItemsSource = Rec.Show_CustomIngredients(uKcal);
+        ListOfCopmpsition.Text = Rec.Show_CustomComposition(uKcal);
 
 
-     
 
-
+      //  DisplayAlert("Alert", uid.ToString(), "OK");
     }
 }

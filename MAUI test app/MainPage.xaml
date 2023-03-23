@@ -41,7 +41,11 @@
                 Text="Find recipes for me"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="SgowAvableRecipes"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" 
+                
+              
+                
+                />
 
             <Label 
                 IsVisible="false"

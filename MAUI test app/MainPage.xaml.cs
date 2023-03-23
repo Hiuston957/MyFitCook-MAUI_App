@@ -11,20 +11,29 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
 
+        
+
+        var User = new User(Preferences.Default.Get("userId", "Unknown"), Preferences.Default.Get("userPass", "Unknown"));
+
+        
+        
+
         Chats = GetChats();
         BindingContext = this;
+        
     }
 
     private void SgowAvableRecipes(object sender, EventArgs e)
     {
+       
 
-        
 
-       // FoundListLabel.IsVisible = true;
+        // FoundListLabel.IsVisible = true;
 
         var FindForName = RecipeName.Text;
 
-        string loc = "Data Source=DESKTOP-LJ35QQ8;Initial Catalog=MyFitCook;Integrated Security=True";
+        string loc = Preferences.Default.Get("serverLoc", "Unknown");
+
 
         SqlConnection con = new SqlConnection(loc);
         con.Open();
@@ -32,10 +41,13 @@ public partial class MainPage : ContentPage
         string quest = $"select ID_Recipe,Name from Recipes where Name LIKE '%{FindForName}%'";
 
 
-        if (FindForName == null) 
+        if ((FindForName == null)||(FindForName == ""))
         {
             quest = $"SELECT NULL WHERE 1 = 0";
         }
+
+        if (FindForName=="all")
+            quest = $"select ID_Recipe,Name from Recipes";
 
 
 
@@ -60,42 +72,31 @@ public partial class MainPage : ContentPage
 
             string tmp = $"{Id}. {Name}";
 
-            //list.Add(tmp);
-
             FastList newMessage = new FastList(tmp);
             Chats.Add(newMessage);
         }
 
         con.Close();
 
-        //ListOfRecipes.ItemsSource = list;
-
     }
-
-
-    /*
-    private async void Lux(object sender, EventArgs e)
-    {
-
-        await Shell.Current.GoToAsync("RecipePage");
-
-        string xd = ListOfRecipes.SelectedItem.ToString();
-        FoundListLabel.IsVisible = true;
-
-    }
-    */
 
 
    
     private async void Lux2(object sender, EventArgs e)
     {
-
-        await Shell.Current.GoToAsync("RecipePage");
+        
 
         string xd = (sender as Label)?.Text;
 
-        await DisplayAlert("Test Alert", xd, "OK");
+        xd= new string(xd.Where(char.IsDigit).ToArray());
 
+        int tmp = int.Parse(xd);
+
+        Preferences.Default.Set("recId", tmp);
+
+        await Shell.Current.GoToAsync("RecipePage");
+
+ 
     }
 
 

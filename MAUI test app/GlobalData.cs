@@ -10,8 +10,8 @@ namespace MAUI_test_app
     {
 
 
-    public int IdRecipe;
-    public int PrefCalory = 1000;
+    //public int IdRecipe;
+   // public int PrefCalory = 1000;
 
 
 
